@@ -46,42 +46,13 @@ class Uplata{
         }
     }
 
-//    function add($ime, $prezime){
-//        try{
-//            $stmt = $this->db->prepare("INSERT INTO clan (ime, prezime) VALUES (:ime, :prezime)");
-//            $stmt->bindParam(":ime", $ime);
-//            $stmt->bindParam(":prezime", $prezime);
-//            $stmt->execute();
-//        }
-//        catch(PDOException $e)
-//        {
-//            echo $e->getMessage();
-//        }
-//    }
-//
-//    function remove($id){
-//        try{
-//            $stmt = $this->db->prepare("DELETE FROM clan WHERE id = :id");
-//            $stmt->bindParam(":id", $id);
-//            $stmt->execute();
-//        }
-//        catch(PDOException $e)
-//        {
-//            echo $e->getMessage();
-//        }
-//    }
-//
-//    function edit($id, $ime, $prezime){
-//        try{
-//            $stmt = $this->db->prepare("UPDATE clan SET ime=:ime, prezime=:prezime WHERE id = :id");
-//            $stmt->bindParam(":id", $id);
-//            $stmt->bindParam(":ime", $ime);
-//            $stmt->bindParam(":prezime", $prezime);
-//            $stmt->execute();
-//        }
-//        catch(PDOException $e)
-//        {
-//            echo $e->getMessage();
-//        }
-//    }
+    function pay($user_id, $datum){
+        try{
+
+        } catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
+
 }
