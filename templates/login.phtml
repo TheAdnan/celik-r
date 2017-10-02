@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Slim 3</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <style>
+
+        body {
+            background: #456;
+            font-family: 'Lato', sans-serif;
+            color: #719e40;
+        }
+
+        .login {
+            width: 400px;
+            margin: 16px auto;
+            font-size: 16px;
+        }
+
+        /* Reset top and bottom margins from certain elements */
+        .login-header,
+        .login p {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* The triangle form is achieved by a CSS hack */
+        .login-triangle {
+            width: 0;
+            margin-right: auto;
+            margin-left: auto;
+            border: 12px solid transparent;
+            border-bottom-color: #719e40;
+        }
+
+        .login-header {
+            background: #719e40;
+            padding: 20px;
+            font-size: 1.4em;
+            font-weight: normal;
+            text-align: center;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .login-container {
+            background: #ebebeb;
+            padding: 12px;
+        }
+
+        /* Every row inside .login-container is defined with p tags */
+        .login p {
+            padding: 12px;
+        }
+
+        .login input {
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            border-width: 1px;
+            border-style: solid;
+            padding: 16px;
+            outline: 0;
+            font-family: inherit;
+            font-size: 0.95em;
+        }
+
+        .login input[type="email"],
+        .login input[type="password"] {
+            background: #fff;
+            border-color: #bbb;
+            color: #555;
+        }
+
+        /* Text fields' focus effect */
+        .login input[type="email"]:focus,
+        .login input[type="password"]:focus {
+            border-color: #888;
+        }
+
+        .login input[type="submit"] {
+            background: #719e40;
+            border-color: transparent;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .login input[type="submit"]:hover {
+            background: #719e40;
+        }
+
+        /* Buttons' focus effect */
+        .login input[type="submit"]:focus {
+            border-color: #719e40;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="login">
+            <div class="login-triangle"></div>
+
+            <h2 class="login-header">Login</h2>
+
+            <form class="login-container">
+                <p><input type="text" placeholder="Email or username"></p>
+                <p><input type="password" placeholder="Password"></p>
+                <p><input type="submit" value="Login"></p>
+            </form>
+        </div>
+    </body>
+</html>

@@ -5,8 +5,13 @@ use Slim\Http\Response;
 
 // Routes
 
+
+$app->get('/login', function (Request $request, Response $response, array $args) {
+    return $this->renderer->render($response, 'login.phtml', $args);
+});
+
+
 $app->get('/clanovi', function (Request $request, Response $response, array $args) {
-    // Render index view
     $clanovi = new Clan($this->db);
     $data = array('clanovi' => $clanovi->getAll());
     return $this->renderer->render($response, 'clanovi.phtml', $data);
