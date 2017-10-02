@@ -15,7 +15,9 @@ $app->get('/clanovi', function (Request $request, Response $response, array $arg
 $app->get('/uplata/{id}', function (Request $request, Response $response, array $args) {
     if(isset($args["id"])){
         return $this->renderer->render($response, 'uplata.phtml', $args);
-    } else{
-        return $this->renderer->render($response, 'index.phtml', $args);
     }
+});
+
+$app->get('/uplata', function (Request $request, Response $response, array $args) {
+    return $this->renderer->render($response, 'index.phtml', $args);
 });
