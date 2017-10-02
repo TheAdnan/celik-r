@@ -14,7 +14,10 @@ $app->get('/clanovi', function (Request $request, Response $response, array $arg
 
 $app->get('/uplata/{id}', function (Request $request, Response $response, array $args) {
     if(isset($args["id"])){
-        return $this->renderer->render($response, 'uplata.phtml', $args);
+        $clan = new Clan($this->db);
+        $uplata = new Uplata($this->db);
+        $data = array('clan' => $clan->get($args["id"]), 'uplate' => $uplata->getAllForClan($args["id"]));
+        return $this->renderer->render($response, 'uplata.phtml', $data);
     }
 });
 

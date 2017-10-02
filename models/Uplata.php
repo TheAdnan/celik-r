@@ -46,6 +46,23 @@ class Uplata{
         }
     }
 
+    function getAllForClan($id){
+        try{
+            $stmt = $this->db->prepare("SELECT * FROM uplata WHERE clan=:clan");
+            $stmt->bindParam(":clan", $id);
+            $stmt->execute();
+            $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($stmt->rowCount() > 0)
+            {
+                return $users;
+            }
+        }
+        catch(PDOException $e)
+        {
+            echo $e->getMessage();
+        }
+    }
+
     function pay($user_id, $datum = null){
         if(is_null($datum)){
             $mjesec = date("m");
