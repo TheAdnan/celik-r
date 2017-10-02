@@ -29,11 +29,22 @@
         <h1>Članovi</h1>
 
         <?php if (isset($clanovi)) : ?>
+            <table>
+                <tr>
+                    <th><b>Ime</b></th>
+                    <th><b>Prezime</b></th>
+                    <th></th>
+                </tr>
             <?php
                 foreach ($clanovi as $clan){ ?>
-                    <p><?= $clan["ime"] . " " ?><span><b><?= $clan["prezime"] ?></b></span></p>
+                    <tr>
+                        <td><?= $clan["ime"] ?></td>
+                        <td><?= $clan["prezime"] ?></td>
+                        <td><a href="uplata/<?= $clan["id"]?>" target="_blank">Uplati</a></td>
+                    </tr>
                <?php }
             ?>
+            </table>
         <?php else: ?>
             <?php 
                 echo "<pre>"; var_dump("error"); die;
