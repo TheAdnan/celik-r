@@ -26,13 +26,18 @@
         </style>
     </head>
     <body>
-        <h1>Slim</h1>
-        <div>a microframework for PHP</div>
+        <h1>Članovi</h1>
 
-        <?php if (isset($name)) : ?>
-            <h2>Hello <?= htmlspecialchars($name); ?>!</h2>
+        <?php if (isset($clanovi)) : ?>
+            <?php
+                foreach ($clanovi as $clan){ ?>
+                    <p><?= $clan["ime"] . " " ?><span><b><?= $clan["prezime"] ?></b></span></p>
+               <?php }
+            ?>
         <?php else: ?>
-            <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
+            <?php 
+                echo "<pre>"; var_dump("error"); die;
+            ?>
         <?php endif; ?>
     </body>
 </html>
