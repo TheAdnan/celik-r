@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Slim 3</title>
+    <title>Evidencija o uplati</title>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
     <style>
         body {
@@ -34,6 +34,14 @@
 </head>
 <body>
 <h1>Uplata</h1>
-<h2></h2>
+<h2><?= $clan["ime"] . " " . $clan["prezime"] ?></h2>
+<div id="uplate">
+    <?php
+    foreach ($uplate as $uplata){ ?>
+        <div><span><?= $uplata["mjesec"] ?></span> - <span><?= $uplata["godina"] ?></span></div>
+    <?php }
+    ?>
+
+</div>
 </body>
 </html>
