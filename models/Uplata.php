@@ -46,9 +46,22 @@ class Uplata{
         }
     }
 
-    function pay($user_id, $datum){
+    function pay($user_id, $datum = null){
+        if(is_null($datum)){
+            $mjesec = date("m");
+            $godina = date("Y");
+        }
+        else{
+            $datum = strtotime($datum);
+            $mjesec = date("m", $datum);
+            $godina = date("Y", $datum);
+        }
         try{
-
+            $stmt = $this->db->prepare("INSERT INTO uplata (clan, mjesec, godina) VALUES (:clan, :mjesec, :godina)");
+            $stmt->bindParam(":clan", $user_id);
+            $stmt->bindParam(":mjesec", $mjesec);
+            $stmt->bindParam(":godina", $godina);
+            $stmt->execute();
         } catch (PDOException $e){
             echo $e->getMessage();
         }
