@@ -16,17 +16,14 @@ $app->get('/login', function (Request $request, Response $response, array $args)
 $app->get('/logout', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
         unset($this->session->user_session);
-        return $response->withRedirect('/login');
     }
-    else{
-        return $response->withRedirect('/login');
-    }
+    return $response->withRedirect('/login');
 });
 
 $app->get('/clanovi', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
         $clanovi = new Clan($this->db);
-        $data = array('clanovi' => $clanovi->getAll(), 'sesija' => $this->session);
+        $data = array('clanovi' => $clanovi->getAll());
         return $this->renderer->render($response, 'clanovi.phtml', $data);
     }
     else{
@@ -39,7 +36,7 @@ $app->get('/uplata/{id}', function (Request $request, Response $response, array 
         if(isset($args["id"])){
             $clan = new Clan($this->db);
             $uplata = new Uplata($this->db);
-            $data = array('clan' => $clan->get($args["id"]), 'uplate' => $uplata->getAllForClan($args["id"]), 'sesija' => $this->session);
+            $data = array('clan' => $clan->get($args["id"]), 'uplate' => $uplata->getAllForClan($args["id"]));
             return $this->renderer->render($response, 'uplata.phtml', $data);
         }
     }
