@@ -2,17 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>Evidencija o uplati</title>
+    <title>Evidencija o članarini za <?= $clan["ime"] . " " . $clan["prezime"] ?></title>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 <header>
     <ul class="menu">
-        <li>
-            <a href="/uplata">Uplate</a>
-            <span></span>
-        </li>
         <li>
             <a href="/clanovi">Članovi</a>
             <span></span>
@@ -24,15 +20,35 @@
         </li>
     </ul>
 </header>
-<h1>Uplata</h1>
+<h1>Uplate</h1>
 <h2><?= $clan["ime"] . " " . $clan["prezime"] ?></h2>
+<div>
+    <form method="post">
+        <p>Uplati za </p>
+        <label for="mjesec">Mjesec</label>
+        <select name="mjesec">
+            <?php
+            for ($i = 1; $i <13; $i++)
+                echo '<option value="' . $i . '">' . $i . '</option>';
+            ?>
+        </select>
+        <br><br>
+        <label for="godina">Godina</label>
+        <input type="number" name="godina" min="2014" max="2100">
+        <br><br>
+        <input type="submit" value="Uplati" name="uplata">
+    </form>
+</div>
 <div id="uplate">
+    <h3>Prethodne uplate:</h3>
+    <br>
+    <ul>
     <?php
     foreach ($uplate as $uplata){ ?>
-        <div><span><?= $uplata["mjesec"] ?></span> - <span><?= $uplata["godina"] ?></span></div>
+        <li><span><?= $uplata["mjesec"] ?></span> - <span><?= $uplata["godina"] ?></span></li>
     <?php }
     ?>
-
+    </ul>
 </div>
 </body>
 </html>

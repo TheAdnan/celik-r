@@ -63,16 +63,7 @@ class Uplata{
         }
     }
 
-    function pay($user_id, $datum = null){
-        if(is_null($datum)){
-            $mjesec = date("m");
-            $godina = date("Y");
-        }
-        else{
-            $datum = strtotime($datum);
-            $mjesec = date("m", $datum);
-            $godina = date("Y", $datum);
-        }
+    function pay($user_id, $mjesec, $godina){
         try{
             $stmt = $this->db->prepare("INSERT INTO uplata (clan, mjesec, godina) VALUES (:clan, :mjesec, :godina)");
             $stmt->bindParam(":clan", $user_id);

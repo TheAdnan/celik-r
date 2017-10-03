@@ -23,19 +23,6 @@ $app->get('/logout', function (Request $request, Response $response, array $args
     }
 });
 
-$app->post('/login', function (Request $request, Response $response, array $args) {
-    $form_data = $request->getParams();
-    $login = new Site($this->db);
-    if($login->login($form_data["username"], $form_data["password"])){
-        $this->session->set('user_session', hash('joaat', $form_data["username"]));
-        return $response->withRedirect('/clanovi');
-    }
-    else{
-        return $response->withRedirect('/login');
-    }
-});
-
-
 $app->get('/clanovi', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
         $clanovi = new Clan($this->db);
@@ -61,13 +48,39 @@ $app->get('/uplata/{id}', function (Request $request, Response $response, array 
     }
 });
 
-$app->get('/uplata', function (Request $request, Response $response, array $args) {
-    if($this->session->exists('user_session')){
-        $uplata = new Uplata($this->db);
-        $data = array('uplate' => $uplata->getAll(), 'sesija' => $this->session);
-        return $this->renderer->render($response, 'index.phtml', $data);
+
+
+
+//Forms
+
+$app->post('/login', function (Request $request, Response $response, array $args) {
+    $form_data = $request->getParams();
+    $login = new Site($this->db);
+    if($login->login($form_data["username"], $form_data["password"])){
+        $this->session->set('user_session', hash('joaat', $form_data["username"]));
+        return $response->withRedirect('/clanovi');
     }
     else{
         return $response->withRedirect('/login');
     }
 });
+
+$app->post('/uplata/{id}', function (Request $request, Response $response, array $args) {
+    if($this->session->exists('user_session')){
+        $form_data = $request->getParams();
+        if(isset($args["id"]) && isset($form_data["uplata"])){
+            $clan = new Clan($this->db);
+            if(!is_null($clan->get($args["id"]))){
+                if(!isset($form_data["mjesec"])) $form_data["mjesec"] = date("m");
+                if(!isset($form_data["godina"])) $form_data["godina"] = date("Y");
+                $uplata = new Uplata($this->db);
+                $uplata->pay($args["id"], $form_data["mjesec"], $form_data["godina"]);
+            }
+            return $response->withRedirect('/uplata/' . $args["id"]);
+        }
+    }
+    else{
+        return $response->withRedirect('/login');
+    }
+});
+
