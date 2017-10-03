@@ -4,35 +4,26 @@
     <meta charset="utf-8"/>
     <title>Evidencija o uplati</title>
     <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
-    <style>
-        body {
-            margin: 50px 0 0 0;
-            padding: 0;
-            width: 100%;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            text-align: center;
-            color: #aaa;
-            font-size: 18px;
-        }
-
-        h1 {
-            color: #719e40;
-            letter-spacing: -3px;
-            font-family: 'Lato', sans-serif;
-            font-size: 80px;
-            font-weight: 200;
-            margin-bottom: 0;
-        }
-        h2 {
-            color: #719e40;
-            font-family: 'Lato', sans-serif;
-            font-size: 60px;
-            font-weight: 200;
-            margin-bottom: 0;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<header>
+    <ul class="menu">
+        <li>
+            <a href="/uplata">Uplate</a>
+            <span></span>
+        </li>
+        <li>
+            <a href="/clanovi">Članovi</a>
+            <span></span>
+        </li>
+        <li>
+            <?php if($sesija->exists('user_session')){ ?><a href="/logout">Logout</a> <?php }
+            else{ ?><a href="/login">Login</a> <?php } ?>
+            <span></span>
+        </li>
+    </ul>
+</header>
 <h1>Uplata</h1>
 <h2><?= $clan["ime"] . " " . $clan["prezime"] ?></h2>
 <div id="uplate">

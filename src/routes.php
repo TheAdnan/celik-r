@@ -39,7 +39,7 @@ $app->post('/login', function (Request $request, Response $response, array $args
 $app->get('/clanovi', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
         $clanovi = new Clan($this->db);
-        $data = array('clanovi' => $clanovi->getAll());
+        $data = array('clanovi' => $clanovi->getAll(), 'sesija' => $this->session);
         return $this->renderer->render($response, 'clanovi.phtml', $data);
     }
     else{
@@ -52,7 +52,7 @@ $app->get('/uplata/{id}', function (Request $request, Response $response, array 
         if(isset($args["id"])){
             $clan = new Clan($this->db);
             $uplata = new Uplata($this->db);
-            $data = array('clan' => $clan->get($args["id"]), 'uplate' => $uplata->getAllForClan($args["id"]));
+            $data = array('clan' => $clan->get($args["id"]), 'uplate' => $uplata->getAllForClan($args["id"]), 'sesija' => $this->session);
             return $this->renderer->render($response, 'uplata.phtml', $data);
         }
     }
@@ -63,7 +63,9 @@ $app->get('/uplata/{id}', function (Request $request, Response $response, array 
 
 $app->get('/uplata', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
-        return $this->renderer->render($response, 'index.phtml', $args);
+        $uplata = new Uplata($this->db);
+        $data = array('uplate' => $uplata->getAll(), 'sesija' => $this->session);
+        return $this->renderer->render($response, 'index.phtml', $data);
     }
     else{
         return $response->withRedirect('/login');
