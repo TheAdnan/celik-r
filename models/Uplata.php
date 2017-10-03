@@ -75,5 +75,20 @@ class Uplata{
         }
     }
 
+    function isPayed($user_id, $mjesec, $godina){
+        try{
+            $stmt = $this->db->prepare("SELECT * FROM uplata WHERE clan=:clan AND mjesec=:mjesec AND godina=:godina");
+            $stmt->bindParam(":clan", $user_id);
+            $stmt->bindParam(":mjesec", $mjesec);
+            $stmt->bindParam(":godina", $godina);
+            $stmt->execute();
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if($stmt->rowCount() > 0) return true;
+            else return false;
+        } catch (PDOException $e){
+            echo $e->getMessage();
+        }
+    }
+
 
 }

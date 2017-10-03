@@ -74,7 +74,7 @@ $app->post('/uplata/{id}', function (Request $request, Response $response, array
                 if(!isset($form_data["mjesec"])) $form_data["mjesec"] = date("m");
                 if(!isset($form_data["godina"])) $form_data["godina"] = date("Y");
                 $uplata = new Uplata($this->db);
-                $uplata->pay($args["id"], $form_data["mjesec"], $form_data["godina"]);
+                if(!$uplata->isPayed($args["id"], $form_data["mjesec"], $form_data["godina"])) $uplata->pay($args["id"], $form_data["mjesec"], $form_data["godina"]);
             }
             return $response->withRedirect('/uplata/' . $args["id"]);
         }
