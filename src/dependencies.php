@@ -30,3 +30,7 @@ $container['db'] = function ($c) {
 $container['session'] = function ($c) {
     return new \SlimSession\Helper;
 };
+
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
+};

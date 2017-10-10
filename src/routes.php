@@ -8,8 +8,12 @@ use Slim\Http\Response;
 
 $app->get('/login', function (Request $request, Response $response, array $args) {
     if($this->session->exists('user_session')){
+        $this->flash->addMessage('Success', 'You have successfully logged in');
         return $response->withRedirect('/clanovi');
     }
+    $this->flash->addMessage('Failed', 'Wrong username or password!');
+//    $messages = $this->flash->getMessages();
+//    print_r($messages);
     return $this->renderer->render($response, 'login.phtml', $args);
 });
 
@@ -73,10 +77,12 @@ $app->post('/uplata/{id}', function (Request $request, Response $response, array
                 $uplata = new Uplata($this->db);
                 if(!$uplata->isPayed($args["id"], $form_data["mjesec"], $form_data["godina"])) $uplata->pay($args["id"], $form_data["mjesec"], $form_data["godina"]);
             }
+            $this->flash->addMessage('Success', 'Payment successful');
             return $response->withRedirect('/uplata/' . $args["id"]);
         }
     }
     else{
+        $this->flash->addMessage('Failed', 'An error occurred');
         return $response->withRedirect('/login');
     }
 });
